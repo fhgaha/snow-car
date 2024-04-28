@@ -1,0 +1,27 @@
+[gd_scene load_steps=10 format=3 uid="uid://c7i4m0xm2t2l1"]
+
+[ext_resource type="PackedScene" uid="uid://bxf40ofmwmous" path="res://models/terrain.glb" id="1_wmkn7"]
+[ext_resource type="Shader" path="res://scenes/snow_terrain.gdshader" id="2_0iu02"]
+[ext_resource type="Texture2D" uid="uid://d2gvtvt4r6eb6" path="res://tex/Concrete_Muddy_001/Concrete_Muddy_001_BaseColor.jpg" id="3_bl2it"]
+[ext_resource type="Texture2D" uid="uid://cwl5coy01aldc" path="res://tex/Concrete_Muddy_001/Concrete_Muddy_001_Normal.jpg" id="4_15qyl"]
+[ext_resource type="Texture2D" uid="uid://fyvsqvjaptbh" path="res://tex/Concrete_Muddy_001/Concrete_Muddy_001_Roughness.jpg" id="5_accwo"]
+[ext_resource type="Texture2D" uid="uid://b50wwpr2ujmup" path="res://tex/snow003/Snow_003_COLOR.jpg" id="6_p5x83"]
+[ext_resource type="Texture2D" uid="uid://c3bfaul4fb4ld" path="res://tex/snow003/Snow_003_NORM.jpg" id="7_e4oxh"]
+[ext_resource type="Texture2D" uid="uid://bj670t3kvcc6p" path="res://tex/snow003/Snow_003_ROUGH.jpg" id="8_dcs25"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d23px"]
+render_priority = 0
+shader = ExtResource("2_0iu02")
+shader_parameter/uv_scale = 4.445
+shader_parameter/snow_height = 0.0
+shader_parameter/snow_albedo = ExtResource("6_p5x83")
+shader_parameter/snow_normal = ExtResource("7_e4oxh")
+shader_parameter/snow_roughness = ExtResource("8_dcs25")
+shader_parameter/dirt_albedo = ExtResource("3_bl2it")
+shader_parameter/dirt_normal = ExtResource("4_15qyl")
+shader_parameter/dirt_roughness = ExtResource("5_accwo")
+
+[node name="terrain" instance=ExtResource("1_wmkn7")]
+
+[node name="Grid" parent="." index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_d23px")
