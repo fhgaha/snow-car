@@ -13,8 +13,8 @@ var speed: float
 
 @onready var grnd_det: RayCast3D = $GroundDetector
 @onready var sound_player: AudioStreamPlayer3D = $"../Off"
-var min_pitch_scale:float = 1
-var max_pitch_scale: float = 2.65
+var min_pitch_scale:float = 0.73
+var max_pitch_scale: float = 1.7
 
 func _ready():
 	#%CarResetter.init()
