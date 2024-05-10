@@ -1,6 +1,8 @@
 class_name FreeCam
 extends Camera3D
 
+@export var start_pos : Node3D
+
 @export var acceleration = 50.0
 @export var moveSpeed = 8.0
 @export var mouseSpeed = 300.0
@@ -29,37 +31,34 @@ func disable():
 	pass
 
 
+func _ready() -> void:
+	if start_pos:
+		self.position = start_pos.position
+	pass
+
+
 func _process(delta):  
 	if !is_enabled: return
 	
-	# Rotate the camera with the controller.
 	if controllerLook.length_squared() > controllerDeadZone:
 		lookAngles -= controllerLook * delta * controllerSpeed
-  
-  
-  # Limit how much we can look up and down.
+	
 	lookAngles.y = clamp(lookAngles.y, PI / -2, PI / 2)
 	set_rotation(Vector3(lookAngles.y, lookAngles.x, 0))
 	
-	# Get the direction to move from the inputs.
 	var dir = updateDirection()
-	
-	
-	# Accelerate or decelerate depending on if we have a direction or not.
 	if dir.length_squared() > 0:
 		velocity += dir * acceleration * delta
 	else:
 		velocity += velocity.direction_to(Vector3.ZERO) * acceleration * delta
-	
-	# Kill the velocity if we are close to zero.
 	if velocity.length() < 0.0005:
 		velocity = Vector3.ZERO
-  
-	  
-  # Limit the camera's top speed to the moveSpeed then move the camera.
 	if velocity.length() > moveSpeed:
 		velocity = velocity.normalized() * moveSpeed
-  
+	if Input.is_action_just_pressed("shift"):
+		moveSpeed *= 2
+	if Input.is_action_just_released("shift"):
+		moveSpeed /= 2
 	translate(velocity * delta)
   
   
@@ -71,13 +70,13 @@ func _process(delta):
 func updateDirection():
 	# Get the direction to move the camera from the input.
 	var dir = Vector3()
-	if Input.is_action_pressed("forward"):
+	if Input.is_action_pressed("ui_up"):
 		dir += Vector3.FORWARD
-	if Input.is_action_pressed("backward"):
+	if Input.is_action_pressed("ui_down"):
 		dir += Vector3.BACK
-	if Input.is_action_pressed("left"):
+	if Input.is_action_pressed("ui_left"):
 		dir += Vector3.LEFT
-	if Input.is_action_pressed("right"):
+	if Input.is_action_pressed("ui_right"):
 		dir += Vector3.RIGHT
 	
 	return dir.normalized()

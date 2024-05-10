@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://blaieaqp413k7"]
+
+[ext_resource type="Script" path="res://addons/terrain_3d/tools/importer.gd" id="1_60b8f"]
+[ext_resource type="Terrain3DStorage" uid="uid://wk5yyi7p5mjd" path="res://models/snowy_mountain_-_terrain_0/snowy_mountain_storage.res" id="1_aviuh"]
+[ext_resource type="Terrain3DMaterial" uid="uid://8h5jxm5dtmh1" path="res://models/snowy_mountain_-_terrain_0/snowy_mountain_material.res" id="2_jq0hf"]
+
+[sub_resource type="Terrain3DTextureList" id="Terrain3DTextureList_yrmi0"]
+
+[node name="Importer" type="Terrain3D"]
+storage = ExtResource("1_aviuh")
+material = ExtResource("2_jq0hf")
+texture_list = SubResource("Terrain3DTextureList_yrmi0")
+debug_level = 2
+debug_show_collision = true
+script = ExtResource("1_60b8f")
+height_file_name = "D:/MyProjects/Godot/Godot 4/DTJ_24_04_2024/models/snowy_mountain_-_terrain_0/hgtmp.exr"
+color_file_name = "res://models/snowy_mountain_-_terrain_0/snowy_mountain_2048x2048.jpg"
+import_position = Vector3(-512, 0, -512)
+import_scale = 200.0
